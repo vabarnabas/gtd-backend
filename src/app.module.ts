@@ -6,9 +6,10 @@ import { AuthModule } from './auth/auth.module';
 import { AtGuard } from './common/guards/at.guard';
 import { PrismaModule } from './prisma/prisma.module';
 import { UserModule } from './user/user.module';
+import { TaskModule } from './task/task.module';
 
 @Module({
-  imports: [AuthModule, PrismaModule, UserModule],
+  imports: [AuthModule, PrismaModule, UserModule, TaskModule],
   controllers: [AppController],
   providers: [
     AppService,
