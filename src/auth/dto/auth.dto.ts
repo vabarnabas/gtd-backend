@@ -8,3 +8,8 @@ export class RegisterDTO {
   email: string;
   password: string;
 }
+
+export class ChangePasswordDTO {
+  oldPassword: string;
+  password: string;
+}

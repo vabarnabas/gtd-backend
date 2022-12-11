@@ -3,7 +3,7 @@ import { GetCurrentUser } from 'src/common/decorators';
 import { Public } from 'src/common/decorators/public.decorator';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthService } from './auth.service';
-import { AuthDTO, RegisterDTO } from './dto';
+import { AuthDTO, ChangePasswordDTO, RegisterDTO } from './dto';
 
 @Controller('auth')
 export class AuthController {
@@ -29,5 +29,13 @@ export class AuthController {
     return this.prismaService.user.findUnique({
       where: { id },
     });
+  }
+
+  @Post('local/changepassword')
+  changePassword(
+    @GetCurrentUser('id') id: string,
+    @Body() dto: ChangePasswordDTO,
+  ) {
+    return this.authService.changePassword(dto, id);
   }
 }

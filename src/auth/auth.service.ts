@@ -1,3 +1,4 @@
+import { ChangePasswordDTO } from './dto/auth.dto';
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compare, genSalt, hash } from 'bcrypt';
@@ -54,5 +55,22 @@ export class AuthService {
     });
 
     return user;
+  }
+
+  async changePassword(dto: ChangePasswordDTO, id: string) {
+    const user = await this.prismaService.user.findUnique({ where: { id } });
+
+    if (!user) throw new ForbiddenException('Access denied.');
+
+    if (!compare(dto.oldPassword, user.password))
+      throw new ForbiddenException('Access denied.');
+
+    const salt = await genSalt();
+    dto.password = await hash(dto.password, salt);
+
+    return await this.prismaService.user.update({
+      where: { id },
+      data: { password: dto.password },
+    });
   }
 }
