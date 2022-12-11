@@ -33,7 +33,7 @@ export class TaskService {
   }
 
   async update(input: Task, id: string) {
-    const task = await this.prismaService.user.findUnique({
+    const task = await this.prismaService.task.findUnique({
       where: {
         id,
       },
@@ -48,7 +48,7 @@ export class TaskService {
   }
 
   async remove(id: string) {
-    const task = await this.prismaService.user.findUnique({
+    const task = await this.prismaService.task.findUnique({
       where: {
         id,
       },
