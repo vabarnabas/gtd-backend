@@ -11,7 +11,7 @@ import { Folder } from '@prisma/client';
 import { GetCurrentUser } from 'src/common/decorators';
 import { FolderService } from './folder.service';
 
-@Controller('tasks')
+@Controller('folders')
 export class FolderController {
   constructor(private readonly folderService: FolderService) {}
 
