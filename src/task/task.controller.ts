@@ -1,4 +1,3 @@
-import { Task } from './../../node_modules/.prisma/client/index.d';
 import {
   Body,
   Controller,
@@ -10,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { TaskService } from './task.service';
 import { GetCurrentUser } from 'src/common/decorators';
+import { Task } from '@prisma/client';
 
 @Controller('tasks')
 export class TaskController {

@@ -7,9 +7,10 @@ import { AtGuard } from './common/guards/at.guard';
 import { PrismaModule } from './prisma/prisma.module';
 import { UserModule } from './user/user.module';
 import { TaskModule } from './task/task.module';
+import { FolderModule } from './folder/folder.module';
 
 @Module({
-  imports: [AuthModule, PrismaModule, UserModule, TaskModule],
+  imports: [AuthModule, PrismaModule, UserModule, TaskModule, FolderModule],
   controllers: [AppController],
   providers: [
     AppService,

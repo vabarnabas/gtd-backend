@@ -1,6 +1,6 @@
-import { Task } from './../../node_modules/.prisma/client/index.d';
 import { PrismaService } from './../prisma/prisma.service';
 import { Injectable, ForbiddenException } from '@nestjs/common';
+import { Task } from '@prisma/client';
 
 @Injectable()
 export class TaskService {
