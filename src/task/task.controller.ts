@@ -25,9 +25,8 @@ export class TaskController {
     return await this.taskService.findSpecific(id);
   }
 
-  @Get('my')
+  @Post('my')
   async findMy(@GetCurrentUser('id') id: string): Promise<Task[]> {
-    console.log('s');
     return await this.taskService.findMy(id);
   }
 
