@@ -9,6 +9,7 @@ import {
   Post,
 } from '@nestjs/common';
 import { TaskService } from './task.service';
+import { GetCurrentUser } from 'src/common/decorators';
 
 @Controller('tasks')
 export class TaskController {
@@ -22,6 +23,12 @@ export class TaskController {
   @Get(':id')
   async findSpecific(@Param('id') id: string): Promise<Task> {
     return await this.taskService.findSpecific(id);
+  }
+
+  @Get('my')
+  async findMy(@GetCurrentUser('id') id: string): Promise<Task[]> {
+    console.log('s');
+    return await this.taskService.findMy(id);
   }
 
   @Post()

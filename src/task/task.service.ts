@@ -22,6 +22,10 @@ export class TaskService {
     return task;
   }
 
+  async findMy(id: string): Promise<Task[]> {
+    return this.prismaService.task.findMany({ where: { userId: id } });
+  }
+
   async create(input: Task) {
     if (!input.title || !input.description || !input.status) {
       throw new ForbiddenException('Access denied.');

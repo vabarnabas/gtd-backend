@@ -13,7 +13,7 @@ export class AuthController {
   ) {}
 
   @Public()
-  @Post('/local/signin')
+  @Post('local/signin')
   signInLocal(@Body() dto: AuthDTO) {
     return this.authService.signInLocal(dto);
   }
