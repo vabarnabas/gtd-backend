@@ -3,7 +3,7 @@ import { GetCurrentUser } from 'src/common/decorators';
 import { Public } from 'src/common/decorators/public.decorator';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AuthService } from './auth.service';
-import { AuthDTO } from './dto';
+import { AuthDTO, RegisterDTO } from './dto';
 
 @Controller('auth')
 export class AuthController {
@@ -16,6 +16,12 @@ export class AuthController {
   @Post('local/signin')
   signInLocal(@Body() dto: AuthDTO) {
     return this.authService.signInLocal(dto);
+  }
+
+  @Public()
+  @Post('local/register')
+  registerLocal(@Body() dto: RegisterDTO) {
+    return this.authService.registerLocal(dto);
   }
 
   @Get('current')

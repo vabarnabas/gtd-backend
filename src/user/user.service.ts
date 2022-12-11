@@ -63,6 +63,8 @@ export class UsersService {
       },
     });
 
+    console.log(users[0].id);
+
     if (users.length === 0) throw new ForbiddenException('Access denied.');
 
     return await this.prismaService.user.delete({

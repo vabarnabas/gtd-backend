@@ -1,8 +1,8 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { compare } from 'bcrypt';
+import { compare, genSalt, hash } from 'bcrypt';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { AuthDTO } from './dto';
+import { AuthDTO, RegisterDTO } from './dto';
 
 @Injectable()
 export class AuthService {
@@ -38,5 +38,21 @@ export class AuthService {
     if (!passwordMatches) throw new ForbiddenException('Access denied.');
 
     return await this.getToken(user.id, user.email, user.displayName);
+  }
+
+  async registerLocal(dto: RegisterDTO) {
+    const salt = await genSalt();
+    dto.password = await hash(dto.password, salt);
+
+    const user = await this.prismaService.user.create({ data: dto });
+
+    await this.prismaService.folder.create({
+      data: {
+        title: 'General',
+        userId: user.id,
+      },
+    });
+
+    return user;
   }
 }
