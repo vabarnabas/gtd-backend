@@ -59,18 +59,8 @@ export class AuthService {
         title: 'Welcome to GTD',
         userId: user.id,
         folderId: folder.id,
-        description: `# Welcome to GTD
-
-        Welcome to the platform. You may have a lot of questions, but I will try to answer it in this document.
-        
-        For easier reading you can [visit the github repository.](https://github.com/vabarnabas/gtd)
-        
-        > This article will be expanded in the future.
-        
-        ## What features are currently implemented?
-        
-        Currently on the platform you can create folders & subfolders and also tasks and subtasks. At the moment you can edit the parent of a folder after clicking options in the navigation. Sadly the editing of a task is not ready yet.
-        `,
+        description:
+          '# Welcome to GTD Welcome to the platform. You may have a lot of questions, but I will try to answer it in this document. For easier reading you can [visit the github repository.](https://github.com/vabarnabas/gtd) > This article will be expanded in the future. ## What features are currently implemented? Currently on the platform you can create folders & subfolders and also tasks and subtasks. At the moment you can edit the parent of a folder after clicking options in the navigation. Sadly the editing of a task is not ready yet.',
         status: 'To Do',
       },
     });
