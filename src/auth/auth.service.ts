@@ -20,7 +20,7 @@ export class AuthService {
           identifier,
           userName: displayName,
         },
-        { secret: 'at-secret', expiresIn: 60 * 60 },
+        { secret: 'at-secret', expiresIn: 60 * 60 * 24 },
       ),
     ]);
 
