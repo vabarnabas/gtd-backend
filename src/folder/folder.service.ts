@@ -25,6 +25,7 @@ export class FolderService {
   async findMy(id: string): Promise<Folder[]> {
     return await this.prismaService.folder.findMany({
       where: { OR: [{ userId: id }, { sharedWith: { some: { id } } }] },
+      include: { sharedWith: true },
     });
   }
 
