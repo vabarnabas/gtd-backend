@@ -23,7 +23,39 @@ export class FolderService {
   }
 
   async findMy(id: string): Promise<Folder[]> {
-    return this.prismaService.folder.findMany({ where: { userId: id } });
+    return await this.prismaService.folder.findMany({
+      where: { OR: [{ userId: id }, { sharedWith: { some: { id } } }] },
+    });
+  }
+
+  async connect(id: string, userId: string): Promise<Folder> {
+    await this.prismaService.folder.findUniqueOrThrow({
+      where: { id },
+    });
+
+    await this.prismaService.user.findFirstOrThrow({
+      where: { id: userId },
+    });
+
+    return await this.prismaService.folder.update({
+      where: { id },
+      data: { sharedWith: { connect: { id: userId } } },
+    });
+  }
+
+  async disconnect(id: string, userId: string): Promise<Folder> {
+    await this.prismaService.folder.findUniqueOrThrow({
+      where: { id },
+    });
+
+    await this.prismaService.user.findFirstOrThrow({
+      where: { id: userId },
+    });
+
+    return await this.prismaService.folder.update({
+      where: { id },
+      data: { sharedWith: { disconnect: { id: userId } } },
+    });
   }
 
   async create(input: Folder) {

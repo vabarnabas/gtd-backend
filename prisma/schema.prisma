@@ -11,12 +11,13 @@ datasource db {
 }
 
 model User {
-  id          String   @id @default(uuid())
-  displayName String
-  email       String   @unique
-  password    String
-  tasks       Task[]
-  folders     Folder[]
+  id            String   @id @default(uuid())
+  displayName   String
+  email         String   @unique
+  password      String
+  tasks         Task[]
+  folders       Folder[]
+  sharedFolders Folder[] @relation("sharedWith")
 }
 
 model Task {
@@ -35,11 +36,12 @@ model Task {
 }
 
 model Folder {
-  id        String   @id @default(uuid())
-  title     String
-  createdAt DateTime @default(now())
-  createdBy User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String
-  parentId  String?
-  tasks     Task[]
+  id         String   @id @default(uuid())
+  title      String
+  createdAt  DateTime @default(now())
+  createdBy  User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  sharedWith User[]   @relation("sharedWith")
+  parentId   String?
+  tasks      Task[]
 }

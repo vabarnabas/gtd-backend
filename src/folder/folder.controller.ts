@@ -30,6 +30,22 @@ export class FolderController {
     return await this.folderService.findMy(id);
   }
 
+  @Post('connect/:id/:userId')
+  async connect(
+    @Param('id') id: string,
+    @Param('userId') userId: string,
+  ): Promise<Folder> {
+    return await this.folderService.connect(id, userId);
+  }
+
+  @Post('disconnect/:id/:userId')
+  async disconnect(
+    @Param('id') id: string,
+    @Param('userId') userId: string,
+  ): Promise<Folder> {
+    return await this.folderService.disconnect(id, userId);
+  }
+
   @Post()
   async create(@Body() input: Folder) {
     return await this.folderService.create(input);
