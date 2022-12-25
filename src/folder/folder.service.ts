@@ -15,6 +15,7 @@ export class FolderService {
       where: {
         id,
       },
+      include: { sharedWith: true },
     });
 
     if (!folder) throw new ForbiddenException('Access denied.');
